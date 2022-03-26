@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+//// アプリ全体で共有するプロパティ
+//class ObsevedFuga: ObservableObject {
+//    @Published var myName = ""  // ログイン名格納変数
+//}
 // ログイン画面
 struct LogInView: View {
     
-    @State var myName = ""    // ログイン名格納変数
+//    @EnvironmentObject var object: ObsevedFuga
+    @State var myName = ""
     
     var body: some View {
         NavigationView {
@@ -19,14 +24,16 @@ struct LogInView: View {
                 ImageSetIcon(iconWidth: 200, iconHeight: 200)
                 
                 // 名前の入力欄
+//                TextField("名前 ", text: $object.myName)
                 TextField("名前 ", text: $myName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()  // 見栄え良くするために上下左右に隙間を入れる
                 
                 // ログインボタン
+//                if object.myName != "" {
                 if myName != "" {
                     // 名前が入力されたらタブビューに遷移するログインボタンを表示する
-                    NavigationLink(destination: HomeTabView()) {
+                    NavigationLink(destination: TopTabView(myName: myName)) {
                         HStack {
                             Text("ログイン")
                             Image(systemName: "arrow.right.circle.fill")

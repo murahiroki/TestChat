@@ -8,7 +8,7 @@
 import SwiftUI
 
 // タブ画面
-struct HomeTabView: View {
+struct TopTabView: View {
     /* NavigationViewの中にTabViewを表示するとタブごとにタイトルを設定できないのでタップしたタブを検知してタイトル指定*/
     enum TabsTitle: String {
         case homeTabTitle = "フレンドリスト"
@@ -17,6 +17,7 @@ struct HomeTabView: View {
     
     @State private var navigationTitle: String = TabsTitle.homeTabTitle.rawValue
     @State private var selectedTab: TabsTitle = .homeTabTitle
+    @State var myName = ""
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -27,7 +28,7 @@ struct HomeTabView: View {
             }.tag(TabsTitle.homeTabTitle)
             
             // メッセージタブ
-            TalkRoomListView().tabItem{
+            TalkRoomListView(myName: myName).tabItem{
                 Image(systemName: "message")
                 Text("メッセージ")
             }.tag(TabsTitle.messegeTabTitle)
@@ -59,7 +60,7 @@ struct HomeTabView: View {
     // プレビュー確認用
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            HomeTabView()
+            TopTabView()
         }
     }
 }

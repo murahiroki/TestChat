@@ -20,10 +20,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct TestChatApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
             // アプリ起動後の画面
             LogInView()
+//                .environmentObject(ObsevedFuga())
         }
     }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ChatBubble: View {
     var message = ""
-    var isMymessage = false
+    var isMyMessage = false
     
     var body: some View {
         HStack {
-            if isMymessage {
+            if isMyMessage {
                 // 自分のメッセージは右寄り
                 Spacer()
                 Text(message)
@@ -51,7 +51,7 @@ struct ChatBubble: View {
         static var previews: some View {
             // 試しにリスト表示してみる
             List(testMessage, id: \.id) { testMessage in
-                ChatBubble(message: testMessage.message, isMymessage: testMessage.ismy)
+                ChatBubble(message: testMessage.message, isMyMessage: testMessage.ismy)
                     .listRowSeparator(.hidden)
             }
             .listStyle(GroupedListStyle()) // リストの外枠をなくす(画面の両端ギリギリまで使うため)

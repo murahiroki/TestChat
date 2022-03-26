@@ -15,17 +15,22 @@ struct MessageView: View {
     // トークルームリスト画面に戻るボタンの名前を相手の名前にカスタマイズするために必要
     @Environment(\.dismiss) var dismiss
     
-    var name = "" // ←これ何の名前入れるので用意したんだっけ？
-    var friendName = ""
+    var myName = "" // 自分の名前
+    var friendName = "" // 戻るボタンを相手の名前にするための変数
     @ObservedObject var messageVM = MessageViewModel()
     @State var typeMessage = ""
     
     var body: some View {
         VStack {
-            List(messageVM.messages, id: \.self){i in
-                ChatBubble(message: i, isMymessage: true)
+            List(messageVM.messages, id: \.id) {i in
+                if i.hostName == self.myName {
+                    ChatBubble(message: i.message, isMyMessage: true)
+                        .listStyle(GroupedListStyle()) // リストの外枠を消す
+                } else {
+                    ChatBubble(message: i.message, isMyMessage: false)
+                        .listStyle(GroupedListStyle()) // リストの外枠を消す
+                }
             }
-            .listStyle(GroupedListStyle()) // リストの外枠を消す
             ZStack {
                 HStack {
                     Image(systemName: "camera")// カメラ起動&撮影写真の送信(実装予定)
@@ -37,7 +42,7 @@ struct MessageView: View {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            self.messageVM.addMessage(message: self.typeMessage, user: self.name)
+                            self.messageVM.addMessage(message: self.typeMessage, hostUser: self.myName)
                             self.typeMessage = ""
                         }
                     }) {
@@ -65,12 +70,11 @@ struct MessageView: View {
         }
         .padding(.bottom, 15.0)     // 下の隙間間隔を15に固定して上はTextEditorの行数によって可変になるようにする
     }
-    
-    // プレビュー確認用
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            MessageView()
-        }
+}
+
+// プレビュー確認用
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        MessageView()
     }
-    
 }
