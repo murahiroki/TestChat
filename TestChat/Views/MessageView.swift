@@ -17,12 +17,12 @@ struct MessageView: View {
     
     var myName = "" // 自分の名前
     var friendName = "" // 戻るボタンを相手の名前にするための変数
-    @ObservedObject var messageVM = MessageViewModel()
+    @ObservedObject var messegeModel = MessegeModel()
     @State var typeMessage = ""
     
     var body: some View {
         VStack {
-            List(messageVM.messages, id: \.id) {i in
+            List(messegeModel.messages, id: \.id) {i in
                 if i.hostName == self.myName {
                     ChatBubble(message: i.message, isMyMessage: true)
                         .listStyle(GroupedListStyle()) // リストの外枠を消す
@@ -42,7 +42,7 @@ struct MessageView: View {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            self.messageVM.addMessage(message: self.typeMessage, hostUser: self.myName)
+                            self.messegeModel.addMessage(message: self.typeMessage, hostUser: self.myName)
                             self.typeMessage = ""
                         }
                     }) {

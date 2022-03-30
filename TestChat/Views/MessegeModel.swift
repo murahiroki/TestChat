@@ -1,5 +1,5 @@
 //
-//  MessageViewModel.swift
+//  FirebaseModel.swift
 //  TestChat
 //
 //  Created by HIROKI MURAYAMA on 2022/03/20.
@@ -14,19 +14,20 @@ struct messageDataType: Identifiable {
     var message: String
 }
 
-class MessageViewModel: ObservableObject {
+class MessegeModel: ObservableObject {
     @Published var messages = [messageDataType]()
-
+    
     init() {
         let db = Firestore.firestore()
         
-        // Firebaseに"message"テーブルを追加
+        // messageコレクションの変化をリッスンする
         db.collection("messages").addSnapshotListener { (snap, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             if let snap = snap {
+                // データの追加(.added)を検知
                 for i in snap.documentChanges {
                     if i.type == .added {
                         let hostName = i.document.get("hostName") as! String
@@ -39,7 +40,7 @@ class MessageViewModel: ObservableObject {
             }
         }
     }
-
+    // メッセージ追加関数
     func addMessage(message: String , hostUser: String) {
         let data = [
             "message": message,
@@ -50,6 +51,7 @@ class MessageViewModel: ObservableObject {
 
         db.collection("messages").addDocument(data: data) { error in
             if let error = error {
+                // ここは相手にメッセージが届かなかったことを知らせるロジックを組む
                 print(error.localizedDescription)
                 return
             }
