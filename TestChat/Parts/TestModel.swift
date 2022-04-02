@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct FriendTable {
+    var id: Int
+    var host_name: String
+    var friend_name: String
+}
 var friendTable: Array<FriendTable> = [FriendTable.init(id: 1, host_name: "My Account", friend_name: "Test User1"),
                                        FriendTable.init(id: 2, host_name: "My Account", friend_name: "Test User2"),
                                        FriendTable.init(id: 3, host_name: "My Account", friend_name: "Test User3"),
@@ -14,6 +19,12 @@ var friendTable: Array<FriendTable> = [FriendTable.init(id: 1, host_name: "My Ac
                                        FriendTable.init(id: 5, host_name: "My Account", friend_name: "Test User5"),
 ]
 
+struct MessageListTable {
+    var id: Int
+    var friend: String
+    var last_message: String
+    var last_time: String
+}
 var messageListTable: Array <MessageListTable> = [MessageListTable.init(id: 1, friend: "Test User1",
                                                                         last_message: "最後のメッセージああああああああああああああああああああ", last_time: "12:27"),
                                                   MessageListTable.init(id: 2, friend: "Test User2",
@@ -24,6 +35,12 @@ var messageListTable: Array <MessageListTable> = [MessageListTable.init(id: 1, f
                                                                         last_message: "最後のメッセージ", last_time: "4:22"),
                                                   ]
 
+struct TestMessage {
+    var id: Int
+    var ismy: Bool
+    var message: String
+    var time: String
+}
 var testMessage: Array <TestMessage> = [TestMessage.init(id: 1, ismy: false, message: "相手メッセージ", time: "12:26"),
                                         TestMessage.init(id: 2, ismy: true, message: "自分メッセージ", time: "12:27"),
                                         TestMessage.init(id: 3, ismy: false, message: "aaaaaaaaaaaaaaaaaaaaaaaaaaa", time: "12:28"),

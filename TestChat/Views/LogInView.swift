@@ -6,19 +6,13 @@
 //
 
 import SwiftUI
-import Firebase
 
-//// アプリ全体で共有するプロパティ
-//class ObsevedFuga: ObservableObject {
-//    @Published var myName = ""  // ログイン名格納変数
-//}
 // ログイン画面
 struct LogInView: View {
     
-    @State var myName = ""
-    @ObservedObject var userModel = UsersModel()    // myNameの初期化前に宣言するとアプリがクラッシュする。ここで結構はまった。
-    @State private var shouldshowtopTabView: Bool = false   // この値ががtrueになったらtopTabViewに遷移する
-    
+    @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
+    @ObservedObject var userModel = UsersModel()            // "users"コレクション関連の宣言
+    @State private var shouldshowtopTabView: Bool = false   // この値がtrueになったらtopTabViewに遷移する(ボタンを押したら画面遷移するロジックのために必要)
     
     var body: some View {
         NavigationView {
@@ -27,21 +21,20 @@ struct LogInView: View {
                 ImageSetIcon(iconWidth: 200, iconHeight: 200)
                 
                 // 名前の入力欄
-                TextField("名前 ", text: $myName)
+                TextField("名前 ", text: $cm.myName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()  // 見栄え良くするために上下左右に隙間を入れる
                 
                 // ログインボタン
-                if myName != "" {
+                if cm.myName != "" {
                     // 名前の入力がされたらボタンを表示する
                     // NavigationLinkのisActiveプロパティを使うことでボタンを押してから何か処理を完了したら画面遷移する動きになる
-                    NavigationLink(destination: TopTabView(myName: myName), isActive: $shouldshowtopTabView) {
+                    NavigationLink(destination: TopTabView(), isActive: $shouldshowtopTabView) {
                         EmptyView()
                     }
                     Button {
-                        // ”users”コレクションにユーザーを登録したら画面遷移
-                        // Firestore.firestore().collection("users").addDocument(data: ["userName": myName])
-                        userModel.addUser(userName: myName)
+                        // ボタン押した時に”users”コレクションにユーザーを登録したら画面遷移
+                        userModel.addUser(userName: cm.myName)
                         shouldshowtopTabView = true
                     } label: {
                         HStack {

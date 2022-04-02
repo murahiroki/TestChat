@@ -13,11 +13,11 @@ struct TopTabView: View {
     enum TabsTitle: String {
         case homeTabTitle = "フレンドリスト"
         case messegeTabTitle = "トーク"
+        case debugTabTitle = "デバッグ画面(リリースする時消す)"
     }
     
     @State private var navigationTitle: String = TabsTitle.homeTabTitle.rawValue
     @State private var selectedTab: TabsTitle = .homeTabTitle
-    @State var myName = ""
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -28,9 +28,15 @@ struct TopTabView: View {
             }.tag(TabsTitle.homeTabTitle)
             
             // メッセージタブ
-            TalkRoomListView(myName: myName).tabItem{
+            TalkRoomListView().tabItem{
                 Image(systemName: "message")
                 Text("メッセージ")
+            }.tag(TabsTitle.messegeTabTitle)
+            
+            // デバッグタブ
+            DebugView().tabItem{
+                Image(systemName: "server.rack")
+                Text("デバッグ")
             }.tag(TabsTitle.messegeTabTitle)
         }
         .navigationBarTitle(navigationTitle, displayMode: .automatic)
@@ -45,7 +51,7 @@ struct TopTabView: View {
         .toolbar{
             ToolbarItemGroup(placement: .navigationBarTrailing){
                 // フレンド追加ボタン押下でフレンド追加画面へ
-                NavigationLink(destination:FriendAddView()){
+                NavigationLink(destination:AddFriendView()){
                     Image(systemName: "person.badge.plus")// フレンド追加ボタン
 
                 }

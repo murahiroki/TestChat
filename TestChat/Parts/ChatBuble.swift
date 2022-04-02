@@ -32,9 +32,8 @@ struct ChatBubble: View {
                     Text(message)
                         .padding(10)
                         .background(Color.white)
-                        .cornerRadius(6)
+                        .cornerRadius(40)
                         .foregroundColor(Color.black)
-                        .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black))
                         .font(.footnote)
                         .frame(width: 232, height: nil, alignment: .leading)
                 }
@@ -53,6 +52,10 @@ struct ChatBubble: View {
             List(testMessage, id: \.id) { testMessage in
                 ChatBubble(message: testMessage.message, isMyMessage: testMessage.ismy)
                     .listRowSeparator(.hidden)
+            }
+            .onAppear {
+                // メッセージ画面の背景を空色にしたいけどこれだとタブ画面も空色になる
+                UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
             }
             .listStyle(GroupedListStyle()) // リストの外枠をなくす(画面の両端ギリギリまで使うため)
         }

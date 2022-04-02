@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State var iconimage: UIImage?
     var body: some View {
         VStack {
             Text("設定画面実装予定")

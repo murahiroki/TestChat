@@ -16,5 +16,9 @@ struct FriendListView: View {
             .listRowSeparator(.hidden)  // リストの仕切りを消す
         }
         .listStyle(GroupedListStyle()) // リストの外枠を消す
+        .onAppear {
+            // メッセージ画面の背景を空色にしたいけどこれだとタブ画面も空色になる
+            UITableView.appearance().backgroundColor = UIColor(Color.white)
+        }
     }
 }

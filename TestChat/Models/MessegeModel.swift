@@ -5,7 +5,7 @@
 //  Created by HIROKI MURAYAMA on 2022/03/20.
 //
 
-import Foundation
+import SwiftUI
 import Firebase
 
 struct messageDataType: Identifiable {
@@ -41,10 +41,11 @@ class MessegeModel: ObservableObject {
         }
     }
     // メッセージ追加関数
-    func addMessage(message: String , hostUser: String) {
+    func addMessage(hostName: String, message: String) {
+        
         let data = [
-            "message": message,
-            "hostName": hostUser
+            "hostName": hostName,
+            "message": message
         ]
 
         let db = Firestore.firestore()

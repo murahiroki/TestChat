@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct MessageView: View {
-    // メッセージ画面の背景色(空色)
-    //    init() {
-    //        UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
-    //    }
     // トークルームリスト画面に戻るボタンの名前を相手の名前にカスタマイズするために必要
     @Environment(\.dismiss) var dismiss
-    
-    var myName = "" // 自分の名前
+    @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
     var friendName = "" // 戻るボタンを相手の名前にするための変数
     @ObservedObject var messegeModel = MessegeModel()
     @State var typeMessage = ""
@@ -23,13 +18,17 @@ struct MessageView: View {
     var body: some View {
         VStack {
             List(messegeModel.messages, id: \.id) {i in
-                if i.hostName == self.myName {
+                if i.hostName == cm.myName {
                     ChatBubble(message: i.message, isMyMessage: true)
                         .listStyle(GroupedListStyle()) // リストの外枠を消す
                 } else {
                     ChatBubble(message: i.message, isMyMessage: false)
                         .listStyle(GroupedListStyle()) // リストの外枠を消す
                 }
+            }
+            .onAppear {
+                // メッセージ画面の背景を空色にしたいけどこれだとタブ画面も空色になる
+                UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
             }
             ZStack {
                 HStack {
@@ -42,8 +41,8 @@ struct MessageView: View {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            self.messegeModel.addMessage(message: self.typeMessage, hostUser: self.myName)
-                            self.typeMessage = ""
+                            messegeModel.addMessage(hostName: cm.myName, message: typeMessage)
+                            typeMessage = ""
                         }
                     }) {
                         Image(systemName: "paperplane.fill")

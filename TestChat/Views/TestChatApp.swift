@@ -26,7 +26,7 @@ struct TestChatApp: App {
         WindowGroup {
             // アプリ起動後の画面
             LogInView()
-//                .environmentObject(ObsevedFuga())
+                .environmentObject(CommonObject())
         }
     }
 }
