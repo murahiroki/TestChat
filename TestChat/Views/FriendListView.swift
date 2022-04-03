@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct FriendListView: View {
+    
+    @ObservedObject var friendsModel = FriendsModel()
+    
     var body: some View {
-        List(friendTable, id: \.id) { friendTable in
+        List(friendsModel.friends, id: \.id) { i in
             NavigationLink(destination: FriendProfileView()) {
-                FriendRow(friendTable: friendTable)
+                FriendRow(friendName: i.friendName)
             }
             .listRowSeparator(.hidden)  // リストの仕切りを消す
         }

@@ -10,10 +10,10 @@ import SwiftUI
 // フレンド追加画面
 struct AddFriendView: View {
     
-    @State var friendName = ""                              // 追加するフレンド用変数
-    @State private var isShowAlert: Bool = false            // ポップアップアラート用変数
     @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
     @ObservedObject var friendsModel = FriendsModel()       // "friends"コレクション関連の宣言
+    @State var friendName = ""                              // 追加するフレンド用変数
+    @State private var isShowAlert: Bool = false            // ポップアップアラート用変数
     
     var body: some View {
         VStack {
@@ -24,8 +24,7 @@ struct AddFriendView: View {
             if friendName != "" {
                 Button(action: {
                     // ここでfriendsコレクションにフレンド追加する関数を呼び出す
-                    self.friendsModel.addFriend(hostName: cm.myName, friendName: friendName)
-                    friendName = ""
+                    friendsModel.addFriend(hostName: cm.myName, friendName: friendName)
                     isShowAlert = true
                 }){
                     Text("追加")

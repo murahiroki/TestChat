@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct FriendRow: View {
-    var friendTable: FriendTable
+    var friendName: String
     
     var body: some View {
         HStack {
             TalkRoomIcon().frame(width: 50, height: 50)
-            Text(friendTable.friend_name)
+            Text(friendName)
         }
     }
 }
