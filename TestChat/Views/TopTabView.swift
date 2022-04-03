@@ -20,6 +20,9 @@ struct TopTabView: View {
     @State private var selectedTab: TabsTitle = .homeTabTitle
     
     var body: some View {
+        // test用
+//        NavigationView {
+            
         TabView(selection: $selectedTab) {
             // ホームタブアイコン
             FriendListView().tabItem{
@@ -61,6 +64,7 @@ struct TopTabView: View {
                 }
             }
         }
+//        }   // test用
     }
     
     // プレビュー確認用

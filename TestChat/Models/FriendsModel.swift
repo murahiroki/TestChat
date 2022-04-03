@@ -50,7 +50,6 @@ class FriendsModel: ObservableObject {
         
         let db = Firestore.firestore()
 
-        // addDocumentはドキュメントIDを自動で生成する
         db.collection("users").whereField("userName", isEqualTo: friendName).getDocuments { (snap, error) in
             if let error = error {
                 // 検索した結果がなくてもここに入ってくるわけではない(例外的なエラーになった時?)
@@ -69,12 +68,22 @@ class FriendsModel: ObservableObject {
                         print("自分をフレンド登録しようとした")
                     } else {
                         // 追加しようとしたフレンドが自分以外の場合はフレンド登録する
-                        db.collection("friends").addDocument(data: data) { error in   // addDocumentはドキュメントIDを自動で生成する
-                            if let error = error {
-                                print("フレンド登録時に例外エラー")
-                                print(error.localizedDescription)
-                            } else {
-                                print("フレンド登録成功")
+                        db.collection("friends").whereField("hostName", isEqualTo: hostName).getDocuments { (snap, error) in
+                            for document in snap!.documents {
+                                let friendList = document.data()["friendName"] as? String
+                                if friendName == friendList {
+                                    // 自分のフレンド達に追加しようとしているフレンドがいる場合何もしない
+                                    print("既にフレンドのユーザーを追加しようとした")
+                                } else {
+                                    db.collection("friends").addDocument(data: data) { error in   // addDocumentはドキュメントIDを自動で生成する
+                                        if let error = error {
+                                            print("フレンド登録時に例外エラー")
+                                            print(error.localizedDescription)
+                                        } else {
+                                            print("フレンド登録成功")
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

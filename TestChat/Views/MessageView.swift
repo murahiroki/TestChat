@@ -27,7 +27,7 @@ struct MessageView: View {
                 }
             }
             .onAppear {
-                // メッセージ画面の背景を空色にしたいけどこれだとタブ画面も空色になる
+                // メッセージ画面の背景を空色にする(タブ画面に戻った時にタブ画面も空色になる)
                 UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
             }
             ZStack {
