@@ -18,12 +18,17 @@ struct MessageView: View {
     var body: some View {
         VStack {
             List(messegeModel.messages, id: \.id) {i in
-                if i.hostName == cm.myName {
-                    ChatBubble(message: i.message, isMyMessage: true)
-                        .listStyle(GroupedListStyle()) // リストの外枠を消す
-                } else {
-                    ChatBubble(message: i.message, isMyMessage: false)
-                        .listStyle(GroupedListStyle()) // リストの外枠を消す
+                if (i.toName == friendName && i.fromName == cm.myName) || (i.toName == cm.myName && i.fromName == friendName) {
+                    // 自分から選んだフレンドに送ったメッセージもしくは、選んだフレンドが自分宛に送ったメッセージのみ表示する
+                    if i.fromName == cm.myName {
+                        // 自分のメッセージは右よせ
+                        ChatBubble(message: i.message, isMyMessage: true)
+                            .listStyle(GroupedListStyle()) // リストの外枠を消す
+                    } else {
+                        // 相手のメッセージは左よせ
+                        ChatBubble(message: i.message, isMyMessage: false)
+                            .listStyle(GroupedListStyle()) // リストの外枠を消す
+                    }
                 }
             }
             .onAppear {
@@ -41,7 +46,7 @@ struct MessageView: View {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            messegeModel.addMessage(hostName: cm.myName, message: typeMessage)
+                            messegeModel.addMessage(fromName: cm.myName, toName: friendName, message: typeMessage)
                             typeMessage = ""
                         }
                     }) {

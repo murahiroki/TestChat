@@ -71,5 +71,4 @@ class UsersModel: ObservableObject {
             }
         }
     }
-
 }

@@ -14,14 +14,19 @@ struct TalkRoomListView: View {
      メッセージ画面の背景がトークルームリストにも影響する？
      */
     
+    @ObservedObject var roomsModel = RoomsModel()
+    @EnvironmentObject var cm : CommonObject                 // 全てのViewで使える変数
+    
     var body: some View {
-        List(messageListTable, id: \.id) { messageListTable in
+        List(roomsModel.rooms, id: \.id) { i in
             ZStack() {
-                MessageRow(friendName: messageListTable.friend, lastMessage: messageListTable.last_message, lastTime: messageListTable.last_time)
-                NavigationLink(destination: MessageView(friendName: messageListTable.friend)) {
-                    EmptyView() // 各リストの下に空ビューを置いてリストを押したら画面遷移するように擬似的に見せる(NavigationLinkの「>」を消すために必要らしい)
+                if i.hostName ==  cm.myName {
+                    MessageRow(friendName: i.roomName, lastMessage: "最後に送られてきたor送ったメッセージ", lastTime: "00:00")
+                    NavigationLink(destination: MessageView(friendName: i.roomName)) {
+                        EmptyView() // 各リストの下に空ビューを置いてリストを押したら画面遷移するように擬似的に見せる(NavigationLinkの「>」を消すために必要らしい)
+                    }
+                    .opacity(0)     // NavigationLinkの「>」を消す
                 }
-                .opacity(0)     // NavigationLinkの「>」を消す
             }
             .listRowSeparator(.hidden)  // リストの仕切りを消す
         }

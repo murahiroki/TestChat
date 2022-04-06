@@ -9,14 +9,17 @@ import SwiftUI
 
 struct FriendListView: View {
     
+    @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
     @ObservedObject var friendsModel = FriendsModel()
     
     var body: some View {
         List(friendsModel.friends, id: \.id) { i in
-            NavigationLink(destination: FriendProfileView()) {
-                FriendRow(friendName: i.friendName)
+            if i.hostName == cm.myName {
+                NavigationLink(destination: FriendProfileView(friendName: i.friendName)) {
+                    FriendRow(friendName: i.friendName)
+                }
+                .listRowSeparator(.hidden)  // リストの仕切りを消す
             }
-            .listRowSeparator(.hidden)  // リストの仕切りを消す
         }
         .listStyle(GroupedListStyle()) // リストの外枠を消す
         .onAppear {

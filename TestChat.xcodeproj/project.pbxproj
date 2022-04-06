@@ -14,6 +14,7 @@
 		E73AE9FE27F5E4BC00546CE1 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73AE9FD27F5E4BC00546CE1 /* FriendsModel.swift */; };
 		E73AEA0227F87C8F00546CE1 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73AEA0127F87C8F00546CE1 /* DebugView.swift */; };
 		E73E460F27F87ECE0049AD79 /* CommonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E460E27F87ECE0049AD79 /* CommonObject.swift */; };
+		E75A89E627FC50A200B3C346 /* RoomsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75A89E527FC50A200B3C346 /* RoomsModel.swift */; };
 		E7ACA15F27E754E300E4294E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7ACA15E27E754E300E4294E /* GoogleService-Info.plist */; };
 		E7ACA16227E7582D00E4294E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7ACA16127E7582D00E4294E /* FirebaseFirestore */; };
 		E7FAD67D27E5DFA400DB407A /* TestChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD67C27E5DFA400DB407A /* TestChatApp.swift */; };
@@ -43,6 +44,7 @@
 		E73AE9FD27F5E4BC00546CE1 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		E73AEA0127F87C8F00546CE1 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		E73E460E27F87ECE0049AD79 /* CommonObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonObject.swift; sourceTree = "<group>"; };
+		E75A89E527FC50A200B3C346 /* RoomsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsModel.swift; sourceTree = "<group>"; };
 		E7ACA15E27E754E300E4294E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7FAD67927E5DFA400DB407A /* TestChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FAD67C27E5DFA400DB407A /* TestChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChatApp.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				E70C2FA227F4B29100E88ED9 /* UsersModel.swift */,
 				E73AE9FD27F5E4BC00546CE1 /* FriendsModel.swift */,
 				E7FAD69C27E6491F00DB407A /* MessegeModel.swift */,
+				E75A89E527FC50A200B3C346 /* RoomsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				E70B894D27E8A570005DBD59 /* ImagePicker.swift in Sources */,
 				E7FAD6A327E6493F00DB407A /* FriendListView.swift in Sources */,
 				E7FAD6AB27E717DF00DB407A /* DynamicHeightTextview.swift in Sources */,
+				E75A89E627FC50A200B3C346 /* RoomsModel.swift in Sources */,
 				E7FAD69D27E6491F00DB407A /* MessegeModel.swift in Sources */,
 				E7FAD69627E622C900DB407A /* TestModel.swift in Sources */,
 				E73AEA0227F87C8F00546CE1 /* DebugView.swift in Sources */,

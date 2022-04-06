@@ -10,7 +10,8 @@ import Firebase
 
 struct messageDataType: Identifiable {
     var id: String
-    var hostName: String
+    var fromName: String
+    var toName: String
     var message: String
 }
 
@@ -30,21 +31,23 @@ class MessegeModel: ObservableObject {
                 // データの追加(.added)を検知
                 for i in snap.documentChanges {
                     if i.type == .added {
-                        let hostName = i.document.get("hostName") as! String
+                        let fromName = i.document.get("fromName") as! String
+                        let toName = i.document.get("toName") as! String
                         let message = i.document.get("message") as! String
                         let id = i.document.documentID
 
-                        self.messages.append(messageDataType(id: id, hostName: hostName, message: message))
+                        self.messages.append(messageDataType(id: id, fromName: fromName, toName: toName, message: message))
                     }
                 }
             }
         }
     }
     // メッセージ追加関数
-    func addMessage(hostName: String, message: String) {
+    func addMessage(fromName: String, toName: String, message: String) {
         
         let data = [
-            "hostName": hostName,
+            "fromName": fromName,
+            "toName": toName,
             "message": message
         ]
 
