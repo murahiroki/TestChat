@@ -16,13 +16,10 @@ struct TopTabView: View {
         case debugTabTitle = "デバッグ画面(リリースする時消す)"
     }
     
-    @State private var navigationTitle: String = TabsTitle.homeTabTitle.rawValue
-    @State private var selectedTab: TabsTitle = .homeTabTitle
+    @State private var navigationTitle: String = TabsTitle.homeTabTitle.rawValue        // タブごとのタイトル格納用変数
+    @State private var selectedTab: TabsTitle = .homeTabTitle                           // 現在選んでるタブを記憶する変数
     
     var body: some View {
-        // test用
-//        NavigationView {
-            
         TabView(selection: $selectedTab) {
             // ホームタブアイコン
             FriendListView().tabItem{
@@ -42,6 +39,7 @@ struct TopTabView: View {
                 Text("デバッグ")
             }.tag(TabsTitle.messegeTabTitle)
         }
+        // タブごとにタイトルを設定する処理
         .navigationBarTitle(navigationTitle, displayMode: .automatic)
         .onChange(of: selectedTab) { tab in
             navigationTitle = selectedTab.rawValue
@@ -64,7 +62,6 @@ struct TopTabView: View {
                 }
             }
         }
-//        }   // test用
     }
     
     // プレビュー確認用

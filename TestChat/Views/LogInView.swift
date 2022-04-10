@@ -22,36 +22,41 @@ struct LogInView: View {
                 
                 // 名前の入力欄
                 TextField("名前 ", text: $cm.myName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()  // 見栄え良くするために上下左右に隙間を入れる
+                    .textFieldStyle(RoundedBorderTextFieldStyle())      // テキストフィールドの枠に丸みをつける
+                    .padding()                                          // 見栄え良くするためにテキストフィールドの上下左右に隙間を入れる
                 
                 // ログインボタン
                 if cm.myName != "" {
                     // 名前の入力がされたらボタンを表示する
-                    // NavigationLinkのisActiveプロパティを使うことでボタンを押してから何か処理を完了したら画面遷移する動きになる
+                    // NavigationLinkのisActiveプロパティを使うことでボタンを押したら何か処理をさせる&画面遷移する動きになる
                     NavigationLink(destination: TopTabView(), isActive: $shouldshowtopTabView) {
                         EmptyView()
                     }
                     Button {
-                        // ボタン押した時に”users”コレクションにユーザーを登録したら画面遷移
+                        // ボタン押した時に”users”コレクションに入力したユーザーを登録
                         userModel.addUser(userName: cm.myName)
+                        // ユーザー登録後に画面遷移(ログイン)
                         shouldshowtopTabView = true
                     } label: {
+                        // ボタンデザイン
                         HStack {
+                            // ボタンの文字
                             Text("ログイン")
+                            // ボタンパーツ(右矢印のシステム画像)
                             Image(systemName: "arrow.right.circle.fill")
-                                .resizable()
-                                .frame(width: 20, height: 20)
+                                .resizable()                    // 縦横比をフレームに合わせてリサイズする
+                                .frame(width: 20, height: 20)   // フレームサイズ
                         }
-                        .frame(width: 100, height: 54)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(27)
-                        .padding(.bottom, 15)
+                        .frame(width: 100, height: 54)  // ボタンの大きさ
+                        .background(Color.green)        // ボタンの色
+                        .foregroundColor(Color.white)   // ボタンのテキスト文字色
+                        .cornerRadius(27)               // ボタンの角に丸みをつける
 
                     }
+                } else {
+                    // テキストフィールドに何も入力されていなければボタンは表示しない(次の画面には遷移できないようにする)
                 }
-            }.padding(.bottom, 100.0)   // 下に100スペースを入れてアイコンのスタート位置を若干上めにする
+            }.padding(.bottom, 200)   // 下に200スペースを入れてアイコンのスタート位置を若干上めにする
         }
     }
     

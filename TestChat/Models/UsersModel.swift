@@ -29,6 +29,7 @@ class UsersModel: ObservableObject {
                 // データの追加(.added)を検知
                 for i in snap.documentChanges {
                     if i.type == .added {
+                        // フィールドを追加する時はシミュレータのアプリを消してからビルドしないと内部で保持しているデータとの整合性が合わずにアプリが落ちる
                         let userName = i.document.get("userName") as! String
                         let id = i.document.documentID
 

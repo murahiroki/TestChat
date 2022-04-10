@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendProfileView: View {
     
-    @ObservedObject var roomsModel = RoomsModel()
+    @ObservedObject var roomsModel = RoomsModel()            // "rooms"コレクションモデル
     @EnvironmentObject var cm : CommonObject                 // 全てのViewで使える変数
     @State private var shouldshowmessageView: Bool = false   // この値がtrueになったらMessageViewに遷移する(ボタンを押したら画面遷移するロジックのために必要)
     var friendName: String = ""                              // フレンドリストから選んだフレンド名格納用変数

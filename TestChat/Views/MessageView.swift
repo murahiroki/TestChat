@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MessageView: View {
-    // トークルームリスト画面に戻るボタンの名前を相手の名前にカスタマイズするために必要
-    @Environment(\.dismiss) var dismiss
+    
+    @Environment(\.dismiss) var dismiss                     // トークルームリスト画面に戻るボタンの名前を相手の名前にカスタマイズするために必要
+    @ObservedObject var messagesModel = MessagesModel()       // "messages"コレクションモデル
     @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
-    var friendName = "" // 戻るボタンを相手の名前にするための変数
-    @ObservedObject var messegeModel = MessegeModel()
-    @State var typeMessage = ""
+    @State var typeMessage = ""                             // 送るメッセージ格納用変数
+    var friendName = ""                                     // やり取りしているフレンド名
+    let dt = Date()                                         // 現在時刻取得用
+    let dateFormatter = DateFormatter()                     // 現在時刻取得用
     
     var body: some View {
         VStack {
-            List(messegeModel.messages, id: \.id) {i in
+            List(messagesModel.messages, id: \.id) {i in
                 if (i.toName == friendName && i.fromName == cm.myName) || (i.toName == cm.myName && i.fromName == friendName) {
                     // 自分から選んだフレンドに送ったメッセージもしくは、選んだフレンドが自分宛に送ったメッセージのみ表示する
                     if i.fromName == cm.myName {
@@ -46,7 +48,8 @@ struct MessageView: View {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            messegeModel.addMessage(fromName: cm.myName, toName: friendName, message: typeMessage)
+                            dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMdHms", options: 0, locale: Locale(identifier: "ja_JP"))
+                            messagesModel.addMessage(fromName: cm.myName, toName: friendName, message: typeMessage, time: dateFormatter.string(from: dt))
                             typeMessage = ""
                         }
                     }) {

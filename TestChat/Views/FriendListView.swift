@@ -10,11 +10,13 @@ import SwiftUI
 struct FriendListView: View {
     
     @EnvironmentObject var cm : CommonObject                // 全てのViewで使える変数
-    @ObservedObject var friendsModel = FriendsModel()
+    @ObservedObject var friendsModel = FriendsModel()       // "friens"コレクションモデル
     
     var body: some View {
         List(friendsModel.friends, id: \.id) { i in
             if i.hostName == cm.myName {
+                // 自分のフレンドのみリスト表示(ユーザーが増えると処理が遅くなる可能性あり)
+                // フレンドリストをタップするとフレンドプロフィール画面へ遷移
                 NavigationLink(destination: FriendProfileView(friendName: i.friendName)) {
                     FriendRow(friendName: i.friendName)
                 }

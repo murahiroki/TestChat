@@ -13,9 +13,10 @@ struct messageDataType: Identifiable {
     var fromName: String
     var toName: String
     var message: String
+    var time: DateFormatter
 }
 
-class MessegeModel: ObservableObject {
+class MessagesModel: ObservableObject {
     @Published var messages = [messageDataType]()
     
     init() {
@@ -31,24 +32,27 @@ class MessegeModel: ObservableObject {
                 // データの追加(.added)を検知
                 for i in snap.documentChanges {
                     if i.type == .added {
+                        // フィールドを追加する時はシミュレータのアプリを消してからビルドしないと内部で保持しているデータとの整合性が合わずにアプリが落ちる
                         let fromName = i.document.get("fromName") as! String
                         let toName = i.document.get("toName") as! String
                         let message = i.document.get("message") as! String
+                        let time = i.document.get("time") as! DateFormatter
                         let id = i.document.documentID
 
-                        self.messages.append(messageDataType(id: id, fromName: fromName, toName: toName, message: message))
+                        self.messages.append(messageDataType(id: id, fromName: fromName, toName: toName, message: message, time: time))
                     }
                 }
             }
         }
     }
     // メッセージ追加関数
-    func addMessage(fromName: String, toName: String, message: String) {
+    func addMessage(fromName: String, toName: String, message: String, time: String) {
         
         let data = [
             "fromName": fromName,
             "toName": toName,
-            "message": message
+            "message": message,
+            "time": time
         ]
 
         let db = Firestore.firestore()

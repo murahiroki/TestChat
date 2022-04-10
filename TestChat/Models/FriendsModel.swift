@@ -29,7 +29,7 @@ class FriendsModel: ObservableObject {
                 // データの追加(.added)を検知
                 for i in snap.documentChanges {
                     if i.type == .added {
-                        // 予期せぬnilエラーでハマった。関連性は不明だけど、ここの順番を変えたらうまくいった。
+                        // フィールドを追加する時はシミュレータのアプリを消してからビルドしないと内部で保持しているデータとの整合性が合わずにアプリが落ちる
                         let hostName = i.document.get("hostName") as! String
                         let friendName = i.document.get("friendName") as! String
                         let id = i.document.documentID

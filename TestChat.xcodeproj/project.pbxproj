@@ -26,7 +26,7 @@
 		E7FAD69427E6218100DB407A /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69327E6218100DB407A /* MessageRow.swift */; };
 		E7FAD69627E622C900DB407A /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69527E622C900DB407A /* TestModel.swift */; };
 		E7FAD69B27E6490500DB407A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69A27E6490500DB407A /* SettingView.swift */; };
-		E7FAD69D27E6491F00DB407A /* MessegeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69C27E6491F00DB407A /* MessegeModel.swift */; };
+		E7FAD69D27E6491F00DB407A /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69C27E6491F00DB407A /* MessagesModel.swift */; };
 		E7FAD69F27E6492E00DB407A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD69E27E6492E00DB407A /* MessageView.swift */; };
 		E7FAD6A127E6493700DB407A /* TalkRoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD6A027E6493700DB407A /* TalkRoomListView.swift */; };
 		E7FAD6A327E6493F00DB407A /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FAD6A227E6493F00DB407A /* FriendListView.swift */; };
@@ -56,7 +56,7 @@
 		E7FAD69327E6218100DB407A /* MessageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		E7FAD69527E622C900DB407A /* TestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		E7FAD69A27E6490500DB407A /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		E7FAD69C27E6491F00DB407A /* MessegeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessegeModel.swift; sourceTree = "<group>"; };
+		E7FAD69C27E6491F00DB407A /* MessagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
 		E7FAD69E27E6492E00DB407A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		E7FAD6A027E6493700DB407A /* TalkRoomListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkRoomListView.swift; sourceTree = "<group>"; };
 		E7FAD6A227E6493F00DB407A /* FriendListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				E73E460E27F87ECE0049AD79 /* CommonObject.swift */,
 				E70C2FA227F4B29100E88ED9 /* UsersModel.swift */,
 				E73AE9FD27F5E4BC00546CE1 /* FriendsModel.swift */,
-				E7FAD69C27E6491F00DB407A /* MessegeModel.swift */,
+				E7FAD69C27E6491F00DB407A /* MessagesModel.swift */,
 				E75A89E527FC50A200B3C346 /* RoomsModel.swift */,
 			);
 			path = Models;
@@ -245,7 +245,7 @@
 				E7FAD6A327E6493F00DB407A /* FriendListView.swift in Sources */,
 				E7FAD6AB27E717DF00DB407A /* DynamicHeightTextview.swift in Sources */,
 				E75A89E627FC50A200B3C346 /* RoomsModel.swift in Sources */,
-				E7FAD69D27E6491F00DB407A /* MessegeModel.swift in Sources */,
+				E7FAD69D27E6491F00DB407A /* MessagesModel.swift in Sources */,
 				E7FAD69627E622C900DB407A /* TestModel.swift in Sources */,
 				E73AEA0227F87C8F00546CE1 /* DebugView.swift in Sources */,
 				E7FAD6A127E6493700DB407A /* TalkRoomListView.swift in Sources */,
