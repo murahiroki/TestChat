@@ -23,6 +23,9 @@ struct TalkRoomListView: View {
             if i.hostName ==  cm.myName {
                 // 自分のトークルームをリスト表示
                 ZStack() {
+//                    messagesModel.messages.forEach {
+//                        print($0.time)
+//                    }
                     MessageRow(friendName: i.roomName, lastMessage: "最後に送られてきたor送ったメッセージ", lastTime: "00:00")
                     NavigationLink(destination: MessageView(friendName: i.roomName)) {
                         EmptyView() // 各リストの下に空ビューを置いてリストを押したら画面遷移するように擬似的に見せる(NavigationLinkの「>」を消すために必要らしい)

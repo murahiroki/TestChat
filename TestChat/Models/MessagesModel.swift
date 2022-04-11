@@ -13,7 +13,7 @@ struct messageDataType: Identifiable {
     var fromName: String
     var toName: String
     var message: String
-    var time: DateFormatter
+    var time: String
 }
 
 class MessagesModel: ObservableObject {
@@ -36,7 +36,7 @@ class MessagesModel: ObservableObject {
                         let fromName = i.document.get("fromName") as! String
                         let toName = i.document.get("toName") as! String
                         let message = i.document.get("message") as! String
-                        let time = i.document.get("time") as! DateFormatter
+                        let time = i.document.get("time") as! String
                         let id = i.document.documentID
 
                         self.messages.append(messageDataType(id: id, fromName: fromName, toName: toName, message: message, time: time))
@@ -54,10 +54,15 @@ class MessagesModel: ObservableObject {
             "message": message,
             "time": time
         ]
+        let dt = Date()                                         // 現在時刻取得用
+        let dateFormatter = DateFormatter()                     // 現在時刻取得用
 
         let db = Firestore.firestore()
+        
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMdHms", options: 0, locale: Locale(identifier: "ja_JP"))
 
-        db.collection("messages").addDocument(data: data) { error in
+//        db.collection("messages").addDocument(data: data) { error in
+        db.collection("messages").document(dateFormatter.string(from: dt)).setData(data) { error in
             if let error = error {
                 // ここは相手にメッセージが届かなかったことを知らせるロジックを組む
                 print(error.localizedDescription)
