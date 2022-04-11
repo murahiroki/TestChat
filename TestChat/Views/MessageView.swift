@@ -41,9 +41,15 @@ struct MessageView: View {
                 HStack {
                     Image(systemName: "camera")// カメラ起動&撮影写真の送信(実装予定)
                     Image(systemName: "photo.artframe")// ライブラリー写真追加ボタン(実装予定)
-                    // TextFieldは1行入力用らしいのでTextEditorを使う
+                    // ↓TextFieldは1行入力用らしいのでTextEditorを使う
+//                    TextField("Aa",text: $typeMessage)
+//                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     // 高さ可変のTextEditorがSwiftUI単体では現状不可能なので自作 -> DynamicHeightTextview.swift
-                    DynamicHeightTextEditor(text: $typeMessage, placeholder: "Aa", minHeight: 35, maxHeight: 160)
+                    // ↓色々問題があるので使うのは一旦保留(表示キーボードがバグる、テキストエディタの高さは可変になるけどメッセージ送信後後も変化した高さが保持される)
+//                    DynamicHeightTextEditor(text: $typeMessage, placeholder: "Aa", minHeight: 35, maxHeight: 160)
+                    TextEditor(text: $typeMessage)
+                        .frame(width: nil, height: 35)
+                        .border(Color.black)
                     Button(action: {
                         if typeMessage != "" {
                             // メッセージが入力されていれば送信
