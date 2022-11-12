@@ -22,14 +22,10 @@ struct FriendProfileView: View {
                 EmptyView()
             }
             Button {
-#if MYDEBUG
-                // cm.myNameを使う処理はなぜかプレビューできないのでプレビュー用ルートを用意
-#else
                 // 遷移と同時にフレンドとのトークルームを作る
                 roomsModel.addRoom(hostName: cm.myName, roomName: friendName)
                 // フレンドとのトークルームを作ると同時に相手側にも自分とのトークルームを強制的に作成
                 //roomsModel.addRoom(hostName: friendName, roomName: cm.myName)
-#endif
                 // ボタン押した時にMessageViewに画面遷移
                 shouldshowmessageView = true
             } label: {
@@ -37,12 +33,4 @@ struct FriendProfileView: View {
             }
         }
     }
-#if MYDEBUG
-    // プレビュー確認用
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            FriendProfileView()
-        }
-    }
-#endif
 }

@@ -63,12 +63,4 @@ struct TopTabView: View {
             }
         }
     }
-#if MYDEBUG
-    // プレビュー確認用
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            TopTabView()
-        }
-    }
-#endif
 }

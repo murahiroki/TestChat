@@ -19,26 +19,6 @@ struct MessageView: View {
     
     var body: some View {
         VStack {
-#if MYDEBUG
-            List(messagesTestModel, id: \.id) {i in
-                if (i.toName == "二郎" && i.fromName == "一郎") || (i.toName == "一郎" && i.fromName == "二郎") {
-                    // 自分から選んだフレンドに送ったメッセージもしくは、選んだフレンドが自分宛に送ったメッセージのみ表示する
-                    if i.fromName == "一郎" {
-                        // 自分のメッセージは右よせ
-                        ChatBubble(message: i.message, isMyMessage: true, time: i.time)
-                            .listStyle(GroupedListStyle()) // リストの外枠を消す
-                    } else {
-                        // 相手のメッセージは左よせ
-                        ChatBubble(message: i.message, isMyMessage: false, time: i.time)
-                            .listStyle(GroupedListStyle()) // リストの外枠を消す
-                    }
-                }
-            }
-            .onAppear {
-                // メッセージ画面の背景を空色にする(タブ画面に戻った時にタブ画面も空色になる)
-                UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
-            }
-#else
             List(messagesModel.messages, id: \.id) {i in
                 if (i.toName == friendName && i.fromName == cm.myName) || (i.toName == cm.myName && i.fromName == friendName) {
                     // 自分から選んだフレンドに送ったメッセージもしくは、選んだフレンドが自分宛に送ったメッセージのみ表示する
@@ -57,7 +37,6 @@ struct MessageView: View {
                 // メッセージ画面の背景を空色にする(タブ画面に戻った時にタブ画面も空色になる)
                 UITableView.appearance().backgroundColor = UIColor(red: 0.5843, green: 0.7529, blue: 0.9255, alpha: 1.0)
             }
-#endif
             ZStack {
                 HStack {
                     Image(systemName: "camera")// カメラ起動&撮影写真の送信(実装予定)
@@ -73,19 +52,11 @@ struct MessageView: View {
                         .border(Color.black)
                     Button(action: {
                         if typeMessage != "" {
-#if MYDEBUG
                             // メッセージが入力されていれば送信
                             // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
                             dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMdHms", options: 0, locale: Locale(identifier: "ja_JP"))
                             messagesModel.addMessage(fromName: cm.myName, toName: friendName, message: typeMessage, time: dateFormatter.string(from: dt))
                             typeMessage = ""
-#else
-                            // メッセージが入力されていれば送信
-                            // ToDo 送信したらテキストエディタの大きさを元に戻したいけどどうやるのかわからん
-                            dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMdHms", options: 0, locale: Locale(identifier: "ja_JP"))
-                            messagesModel.addMessage(fromName: cm.myName, toName: friendName, message: typeMessage, time: dateFormatter.string(from: dt))
-                            typeMessage = ""
-#endif
                         }
                     }) {
                         Image(systemName: "paperplane.fill")
@@ -112,12 +83,4 @@ struct MessageView: View {
         }
         .padding(.bottom, 15.0)     // 下の隙間間隔を15に固定して上はTextEditorの行数によって可変になるようにする
     }
-#if MYDEBUG
-    // プレビュー確認用
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            MessageView()
-        }
-    }
-#endif
 }
