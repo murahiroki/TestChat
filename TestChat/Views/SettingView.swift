@@ -14,4 +14,12 @@ struct SettingView: View {
         }
         
     }
+#if MYDEBUG
+    // プレビュー確認用
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            SettingView()
+        }
+    }
+#endif
 }

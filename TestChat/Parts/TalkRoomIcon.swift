@@ -17,7 +17,6 @@ struct TalkRoomIcon: View {
                 .clipShape(Circle())
         }
     }
-    
     // プレビュー確認用
     struct ContentView_Previews: PreviewProvider {
         // 200×200で表示してみる

@@ -8,6 +8,5 @@
 import SwiftUI
 
 class CommonObject: ObservableObject {
-    @Published var debugLog:[String] = []
     @Published var myName: String = ""
 }

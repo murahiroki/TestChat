@@ -23,8 +23,12 @@ struct AddFriendView: View {
             
             if friendName != "" {
                 Button(action: {
+#if MYDEBUG
+                    
+#else
                     // ここでfriendsコレクションにフレンド追加する関数を呼び出す
                     friendsModel.addFriend(hostName: cm.myName, friendName: friendName)
+#endif
                     isShowAlert = true
                 }){
                     Text("追加")
@@ -35,4 +39,12 @@ struct AddFriendView: View {
             }
         }
     }
+#if MYDEBUG
+    // プレビュー確認用
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            AddFriendView()
+        }
+    }
+#endif
 }

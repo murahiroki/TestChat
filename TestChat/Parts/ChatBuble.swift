@@ -10,19 +10,28 @@ import SwiftUI
 struct ChatBubble: View {
     var message = ""
     var isMyMessage = false
+    var time = "2000年1月1日 23:59:59"
     
     var body: some View {
+        let startIndex = time.index(time.firstIndex(of: " ")!, offsetBy: 1)     // 時間情報文字列から最初の" "+1のインデックス番号を取得
+        let lastIndex = time.index(time.lastIndex(of: ":")!, offsetBy: -1)      // 時間情報文字列から最後の":"-1のインデックス番号を取得
+        let substring = time[startIndex...lastIndex]                            // 時間情報文字列から時分のみを取得して表示する
         HStack {
             if isMyMessage {
                 // 自分のメッセージは右寄り
                 Spacer()
+                Text(substring)
+                    .foregroundColor(Color.gray)
+                    .font(.footnote)
+                    .padding(.top)
+                    .frame(width: nil, height: nil, alignment: .trailing)
                 Text(message)
                     .padding(10)
                     .background(Color.green)
                     .cornerRadius(40)
                     .foregroundColor(Color.black)
                     .font(.footnote)
-                    .frame(width: 232, height: nil, alignment: .trailing)
+                    .frame(width: nil, height: nil, alignment: .trailing)
             } else {
                 // 相手のメッセージは左寄り
                 HStack() {
@@ -30,12 +39,17 @@ struct ChatBubble: View {
                         .frame(width: 40, height: 40, alignment: .bottom)
                         .padding(.top, 5.0)
                     Text(message)
-                        .padding(10)
-                        .background(Color.white)
-                        .cornerRadius(40)
-                        .foregroundColor(Color.black)
+                            .padding(10)
+                            .background(Color.white)
+                            .cornerRadius(40)
+                            .foregroundColor(Color.black)
+                            .font(.footnote)
+                            .frame(width: nil, height: nil, alignment: .leading)
+                    Text(substring)
+                        .foregroundColor(Color.gray)
                         .font(.footnote)
-                        .frame(width: 232, height: nil, alignment: .leading)
+                        .padding(.top)
+                    
                 }
                 Spacer()
             }
@@ -49,9 +63,19 @@ struct ChatBubble: View {
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             // 試しにリスト表示してみる
-            List(testMessage, id: \.id) { testMessage in
-                ChatBubble(message: testMessage.message, isMyMessage: testMessage.ismy)
-                    .listRowSeparator(.hidden)
+            List(messagesTestModel, id: \.id) { messagesTestModel in
+                if (messagesTestModel.toName == "二郎" && messagesTestModel.fromName == "一郎") || (messagesTestModel.toName == "一郎" && messagesTestModel.fromName == "二郎") {
+                    // 自分から選んだフレンドに送ったメッセージもしくは、選んだフレンドが自分宛に送ったメッセージのみ表示する
+                    if messagesTestModel.fromName == "一郎" {
+                        // 自分のメッセージは右よせ
+                        ChatBubble(message: messagesTestModel.message, isMyMessage: true, time: messagesTestModel.time)
+                            .listStyle(GroupedListStyle()) // リストの外枠を消す
+                    } else {
+                        // 相手のメッセージは左よせ
+                        ChatBubble(message: messagesTestModel.message, isMyMessage: false, time: messagesTestModel.time)
+                            .listStyle(GroupedListStyle()) // リストの外枠を消す
+                    }
+                }
             }
             .onAppear {
                 // メッセージ画面の背景を空色にしたいけどこれだとタブ画面も空色になる

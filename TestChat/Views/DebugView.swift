@@ -19,4 +19,12 @@ struct DebugView: View {
 //        }
         Text("操作ログ取得")
     }
+#if MYDEBUG
+    // プレビュー確認用
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            DebugView()
+        }
+    }
+#endif
 }

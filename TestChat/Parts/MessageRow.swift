@@ -38,9 +38,12 @@ struct MessageRow: View {
     // プレビュー確認用
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            // 試しにリスト複数行表示してみる
-            List(messageListTable, id: \.id) { messageListTable in
-                MessageRow(friendName: messageListTable.friend, lastMessage: messageListTable.last_message, lastTime: messageListTable.last_time)
+            // 試しにメッセージリストを表示してみる
+            List(roomsTestModel, id: \.id) { roomsTestModel in
+                // Test1としてログインしている想定で表示
+                if roomsTestModel.hostName ==  "一郎" {
+                    MessageRow(friendName: roomsTestModel.roomName, lastMessage: "最後に送られてきたor送ったメッセージ", lastTime: "00:00")
+                }
             }
             .listStyle(GroupedListStyle()) // リストの外枠をなくす(画面の両端ギリギリまで使うため)
         }
